@@ -1,0 +1,28 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+def tiaoshi
+  # 模块对外服务
+  pod 'Services', :path => './PodsCompoent', :project_name => 'Services'
+  # 登录服务
+  pod 'LoginModule', :path => './PodsCompoent', :project_name => 'LoginModule'
+  # 用户服务
+  pod 'UserModule', :path => './PodsCompoent', :project_name => 'LoginModule'
+  # 商品服务
+  pod 'GoodsModule', :path => './PodsCompoent', :project_name => 'GoodsModule'
+end
+
+target 'MJRouter_Example' do
+  
+  tiaoshi
+  
+  pod 'MJRouter', :path => '../'
+  
+  
+  target 'MJRouter_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
