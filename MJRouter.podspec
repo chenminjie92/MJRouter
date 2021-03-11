@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MJRouter'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.swift_versions    = '5.0'
   s.summary          = '路由服务管理工具'
 
