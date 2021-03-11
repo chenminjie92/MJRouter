@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chenminjie92@126.com' => '845083062@qq.com' }
-  s.source           = { :git => 'https://github.com/chenminjie92/MJRouter.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/chenminjie92/MJRouter.git', :tag => "#{spec.version}" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.platform          = :ios, "10.0"
   s.static_framework  = true
