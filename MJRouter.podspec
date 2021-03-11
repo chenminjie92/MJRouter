@@ -22,11 +22,11 @@ Pod::Spec.new do |s|
                     路由服务管理工具
                        DESC
 
-  s.homepage         = 'https://github.com/chenminjie92@126.com/MJRouter'
+  s.homepage         = 'https://github.com/chenminjie92/MJRouter'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chenminjie92@126.com' => '845083062@qq.com' }
-  s.source           = { :git => 'https://github.com/chenminjie92@126.com/MJRouter.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/chenminjie92/MJRouter.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.platform          = :ios, "10.0"
   s.static_framework  = true
