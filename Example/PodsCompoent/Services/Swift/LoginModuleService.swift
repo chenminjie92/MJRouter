@@ -8,7 +8,7 @@
 import Foundation
 
 /// 登录模块
-public protocol LoginModuleService: class {
+@objc public protocol LoginModuleService: AnyObject {
     
     /// 用户是否登录
     var isLogin: Bool {get}

@@ -18,7 +18,7 @@ public class RouterConfig: NSObject {
     /// 来源
     public var fromViewController: UIViewController?
     /// 参数
-    public var userInfo: [String: Any]?
+    @objc public var userInfo: [String: Any]?
     /// 控制器回调
     public var completion: (([String : Any]?) -> Void)?
     /// 调用的事件

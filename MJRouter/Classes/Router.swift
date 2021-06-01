@@ -13,10 +13,10 @@ import Foundation
 public class Router: NSObject {
     
     /// 跳转方式
-    public enum JumpWay{
-        case push
-        case presentModally
-        case custom
+    @objc public enum JumpWay: Int{
+        case push = 0
+        case presentModally = 1
+        case custom = 2
     }
     
     public enum RouterHandleError: Error {
@@ -39,7 +39,7 @@ public class Router: NSObject {
 public extension Router {
     
     /// 自动注册
-    static func autoRegister() {
+    @objc static func autoRegister() {
         RouterRegistry.registerAll()
     }
 }
@@ -81,4 +81,20 @@ public extension Router {
     static func makeDestination<Protocol>(to routableService: RoutableService<Protocol>) -> Protocol? {
         return Router.default.serviceManager.makeDestination(to: routableService)
     }
+    
+    /// oc注册服务
+    /// - Parameters:
+    ///   - routableService: 服务
+    ///   - serviceClass: 实现服务的类
+    @objc static func objcRegister(_ routableService: Protocol, forMakingService serviceClass: NSObject.Type){
+        Router.default.serviceManager.objcRegister(routableService, forMakingService: serviceClass)
+    }
+    
+    /// oc获取服务
+    /// - Parameter routableService: 服务
+    /// - Returns: 服务实现
+    @objc static func objcMakeDestination(_ routableService: Protocol) -> AnyObject? {
+        return Router.default.serviceManager.objcMakeDestination(to: routableService)
+    }
+    
 }

@@ -75,6 +75,7 @@ public class RouterHelper {
     public enum RouterHelperUrl {
         case user
         case goodsDetail(goodsId: String)
+        case shopCart
         
         var pattern: String {
             switch self {
@@ -82,6 +83,8 @@ public class RouterHelper {
                 return RegisteredUrl.user.rawValue
             case .goodsDetail(_):
                 return RegisteredUrl.goodsDetail.rawValue
+            case .shopCart:
+                return RegisteredUrl.shopCart.rawValue
             }
         }
         /// 参数
@@ -105,6 +108,8 @@ public class RouterHelper {
             switch self {
             case .user:
                 return true
+            case .shopCart:
+                return true
             default:
                 return false
             }
@@ -115,5 +120,6 @@ public class RouterHelper {
     public enum RegisteredUrl: String {
         case user = "mj://user/center"
         case goodsDetail = "mj://goods/detail"
+        case shopCart = "mj://shopCart/index"
     }
 }

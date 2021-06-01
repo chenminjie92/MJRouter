@@ -20,6 +20,17 @@ extension Router {
         }
     }
     
+    @objc public static func objcRegisterController(url string: String, page: UIViewController.Type) {
+        
+        Router.register(url: string) { (config) in
+            page.conforms(to: RouterProtocol.self)
+            if let _page = page as? RouterProtocol.Type {
+                let vc = _page.destination(with: config)
+                config?.action?([PageKey: vc as Any])
+            }
+        }
+    }
+    
     /// 自定义注册
     /// - Parameters:
     ///   - string: 路由地址
@@ -41,6 +52,25 @@ extension Router {
     public static func open(url string: URLConvertiable, extened parameters: [String: Any]? = nil, completion: (([String : Any]?) -> Void)? = nil, jumpWay: JumpWay = .push, from viewController: UIViewController?, animated: Bool = true) {
         
         Router.handle(url: string, extened: parameters, completion: completion, from: viewController) { (userInfo) in
+            switch jumpWay {
+            case .push:
+                if let vc = userInfo?[PageKey] as? UIViewController {
+                    viewController?.navigationController?.pushViewController(vc, animated: animated)
+                }
+            case .presentModally:
+                if let vc = userInfo?[PageKey] as? UIViewController {
+                    viewController?.navigationController?.present(vc, animated: animated, completion: nil)
+                }
+            case .custom:
+                break
+            }
+        }
+    }
+    
+    @objc public static func objcOpen(url string: String?, extened parameters: [String: Any]? = nil, completion: (([String : Any]?) -> Void)? = nil, jumpWay: JumpWay = .push, from viewController: UIViewController?, animated: Bool = true) {
+        
+        Router.handle(url: string, extened: parameters, completion: completion, from: viewController) { (userInfo) in
+            
             switch jumpWay {
             case .push:
                 if let vc = userInfo?[PageKey] as? UIViewController {

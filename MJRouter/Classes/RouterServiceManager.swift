@@ -21,9 +21,7 @@ class RouterServiceManager: NSObject {
     func register<Protocol,T: NSObject>(_ routableService: RoutableService<Protocol>, forMakingService serviceClass: T.Type) where T: RouterProtocol {
         
         lock.lock()
-        if allServices[routableService.typeName] == nil {
-            allServices[routableService.typeName] = serviceClass
-        }
+        allServices[routableService.typeName] = serviceClass
         lock.unlock()
     }
     
@@ -37,6 +35,32 @@ class RouterServiceManager: NSObject {
             return nil
         }
         return serviceClass.init() as? Protocol
+    }
+    
+    /// oc 注册服务
+    /// - Parameters:
+    ///   - routableService: 服务
+    ///   - serviceClass: 实现类
+    @objc func objcRegister(_ routableService: Protocol, forMakingService serviceClass: NSObject.Type) {
+        
+        lock.lock()
+        if let typeName = NSStringFromProtocol(routableService).components(separatedBy: ".").last {
+            allServices[typeName] = serviceClass
+        }
+        lock.unlock()
+    }
+    
+    
+    
+    /// oc创建服务
+    /// - Parameter routableService: 服务的协议
+    /// - Returns: 服务
+    @objc func objcMakeDestination(to routableService: Protocol) -> AnyObject? {
+        
+        if let typeName = NSStringFromProtocol(routableService).components(separatedBy: ".").last, let serviceClass = allServices[typeName] {
+            return serviceClass.init()
+        }
+        return nil
     }
 }
 

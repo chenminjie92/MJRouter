@@ -21,6 +21,6 @@ public struct RoutableService<Protocol> {
     let typeName: String
    
     public init() {
-        typeName = String(describing: Protocol.self)
+        typeName = String(describing: Protocol.self).description
     }
 }

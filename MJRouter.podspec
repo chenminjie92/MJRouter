@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MJRouter'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.swift_versions    = '5.0'
   s.summary          = '路由服务管理工具'
 
@@ -34,11 +34,4 @@ Pod::Spec.new do |s|
 
   s.source_files = 'MJRouter/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'MJRouter' => ['MJRouter/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

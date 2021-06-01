@@ -8,7 +8,7 @@
 import Foundation
 
 /// 用户模块
-public protocol UserModuleService: class {
+public protocol UserModuleService: AnyObject {
     
     /// 根据用户id获取用户信息
     func getUserInfo(for userId: String, result: ((_ userInfo: [String: Any]) -> Void))
