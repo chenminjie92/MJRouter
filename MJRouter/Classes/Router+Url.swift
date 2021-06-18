@@ -51,7 +51,7 @@ extension Router {
     ///   - animated: 是否动画
     public static func open(url string: URLConvertiable, extened parameters: [String: Any]? = nil, completion: (([String : Any]?) -> Void)? = nil, jumpWay: JumpWay = .push, from viewController: UIViewController?, animated: Bool = true) {
         
-        Router.handle(url: string, extened: parameters, completion: completion, from: viewController) { (userInfo) in
+        Router.handle(url: string, extened: parameters, completion: completion, from: viewController) {[weak viewController] (userInfo) in
             switch jumpWay {
             case .push:
                 if let vc = userInfo?[PageKey] as? UIViewController {
@@ -69,7 +69,7 @@ extension Router {
     
     @objc public static func objcOpen(url string: String?, extened parameters: [String: Any]? = nil, completion: (([String : Any]?) -> Void)? = nil, jumpWay: JumpWay = .push, from viewController: UIViewController?, animated: Bool = true) {
         
-        Router.handle(url: string, extened: parameters, completion: completion, from: viewController) { (userInfo) in
+        Router.handle(url: string, extened: parameters, completion: completion, from: viewController) {[weak viewController] (userInfo) in
             
             switch jumpWay {
             case .push:

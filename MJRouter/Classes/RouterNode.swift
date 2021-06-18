@@ -16,7 +16,7 @@ public class RouterConfig: NSObject {
         return url?.components(separatedBy: "?").first?.components(separatedBy: "#").first
     }
     /// 来源
-    public var fromViewController: UIViewController?
+    public weak var fromViewController: UIViewController?
     /// 参数
     @objc public var userInfo: [String: Any]?
     /// 控制器回调

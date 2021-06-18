@@ -11,11 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ShopCartViewController (Service)<RouterProtocol>
+//@interface ShopCartViewController (Service)<RouterProtocol>
+//
+//@end
+
+@interface ShopCartModuleServiceIMP : NSObject<ShopCartModuleService,RouterProtocol>
 
 @end
 
-@interface ShopCartModuleServiceIMP : NSObject<ShopCartModuleService,RouterProtocol>
+@interface ShopCartModuleServiceIMP1 : NSObject<RouterProtocol>
 
 @end
 

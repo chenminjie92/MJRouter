@@ -7,10 +7,23 @@
 
 #import "ShopCartModuleServiceIMP.h"
 
-@implementation ShopCartViewController (Service)
+//@implementation ShopCartViewController (Service)
+//
+//+ (void)registerRoutableDestination {
+//    [OCRouterHelper registerController:RouterUrlShopCart page:[ShopCartViewController class]];
+//}
+//
+//+ (id _Nullable)destinationWith:(RouterConfig * _Nullable)configuration {
+//    ShopCartViewController *vc = [ShopCartViewController new];
+//    return vc;
+//}
+//
+//@end
+
+@implementation ShopCartModuleServiceIMP1
 
 + (void)registerRoutableDestination {
-    [OCRouterHelper registerController:RouterUrlShopCart page:[ShopCartViewController class]];
+    [OCRouterHelper registerController:RouterUrlShopCart page:[ShopCartModuleServiceIMP1 class]];
 }
 
 + (id _Nullable)destinationWith:(RouterConfig * _Nullable)configuration {

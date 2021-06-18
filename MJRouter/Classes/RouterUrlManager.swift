@@ -25,7 +25,7 @@ class RouterUrlManager: NSObject {
             return
         }
         
-        guard (url?.encodeUrl) != nil else {
+        guard let encodedUrl = url?.encodeUrl else {
             return
         }
         
@@ -40,8 +40,12 @@ class RouterUrlManager: NSObject {
         guard let schemeNode = allRouters[scheme] else {
             return
         }
-        guard let tailNode = findTailNode(next: schemeNode, paths: &paths, index: 0) else {
-            return
+        var tailNode = schemeNode
+        if schemeNode.subNodes.count > 0 {
+            guard let _tailNode = findTailNode(next: schemeNode, paths: &paths, index: 0) else {
+                return
+            }
+            tailNode = _tailNode
         }
         var queryParameters = url?.queryParameters
         if let _parameters = parameters {
@@ -49,6 +53,7 @@ class RouterUrlManager: NSObject {
                 return queryParametersValue
             })
         }
+        queryParameters?["url"] = encodedUrl
         tailNode.config?.fromViewController = viewController
         tailNode.config?.userInfo = queryParameters
         tailNode.config?.completion = completion
@@ -69,17 +74,20 @@ class RouterUrlManager: NSObject {
             assertionFailure("Router url must be have scheme" + url.urlStringValue)
             return
         }
-        guard var paths = url.paths, paths.count > 0 else {
-            assertionFailure("Router url must be have path" + url.urlStringValue)
-            return
-        }
         
         if allRouters[scheme] == nil {
             let schemeNode = RouterNode(name: scheme)
             allRouters[scheme] = schemeNode
         }
-        let schemeNode: RouterNode? = allRouters[scheme]
-        let tailNode = parse(next: schemeNode, paths: &paths, index: 0)
+        
+        guard let schemeNode: RouterNode = allRouters[scheme] else {
+            assertionFailure("MJRouter url must be have schemeNode" + url.urlStringValue)
+            return
+        }
+        var tailNode: RouterNode = schemeNode
+        if var paths = url.paths, paths.count > 0 {
+            tailNode = parse(next: schemeNode, paths: &paths, index: 0)
+        }
         
         if tailNode.config != nil {
             assertionFailure("Router url had been added")
